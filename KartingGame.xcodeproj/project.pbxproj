@@ -1,0 +1,389 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		577599211E84D08D0037DE6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577599201E84D08D0037DE6F /* AppDelegate.swift */; };
+		577599231E84D08D0037DE6F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577599221E84D08D0037DE6F /* ViewController.swift */; };
+		577599261E84D08D0037DE6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 577599241E84D08D0037DE6F /* Main.storyboard */; };
+		577599281E84D08D0037DE6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 577599271E84D08D0037DE6F /* Assets.xcassets */; };
+		5775992B1E84D08D0037DE6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 577599291E84D08D0037DE6F /* LaunchScreen.storyboard */; };
+		577599531E84D4330037DE6F /* HBFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577599521E84D4210037DE6F /* HBFramework.framework */; };
+		577599541E84D4330037DE6F /* HBFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 577599521E84D4210037DE6F /* HBFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		577599511E84D4210037DE6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5775994D1E84D4210037DE6F /* HBFramework.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1DDA0DBA1D780BD000506A9E;
+			remoteInfo = HBFramework;
+		};
+		577599551E84D4330037DE6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5775994D1E84D4210037DE6F /* HBFramework.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1DDA0DB91D780BD000506A9E;
+			remoteInfo = HBFramework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		577599571E84D4330037DE6F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				577599541E84D4330037DE6F /* HBFramework.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5775991D1E84D08D0037DE6F /* KartingGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KartingGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		577599201E84D08D0037DE6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		577599221E84D08D0037DE6F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		577599251E84D08D0037DE6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		577599271E84D08D0037DE6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5775992A1E84D08D0037DE6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5775992C1E84D08D0037DE6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5775994D1E84D4210037DE6F /* HBFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HBFramework.xcodeproj; path = KartingGame/Carthage/Checkouts/HBFramework/HBFramework.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5775991A1E84D08D0037DE6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				577599531E84D4330037DE6F /* HBFramework.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		577599141E84D08D0037DE6F = {
+			isa = PBXGroup;
+			children = (
+				5775994D1E84D4210037DE6F /* HBFramework.xcodeproj */,
+				5775991F1E84D08D0037DE6F /* KartingGame */,
+				5775991E1E84D08D0037DE6F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5775991E1E84D08D0037DE6F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5775991D1E84D08D0037DE6F /* KartingGame.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5775991F1E84D08D0037DE6F /* KartingGame */ = {
+			isa = PBXGroup;
+			children = (
+				577599201E84D08D0037DE6F /* AppDelegate.swift */,
+				577599221E84D08D0037DE6F /* ViewController.swift */,
+				577599241E84D08D0037DE6F /* Main.storyboard */,
+				577599271E84D08D0037DE6F /* Assets.xcassets */,
+				577599291E84D08D0037DE6F /* LaunchScreen.storyboard */,
+				5775992C1E84D08D0037DE6F /* Info.plist */,
+			);
+			path = KartingGame;
+			sourceTree = "<group>";
+		};
+		5775994E1E84D4210037DE6F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				577599521E84D4210037DE6F /* HBFramework.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5775991C1E84D08D0037DE6F /* KartingGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5775992F1E84D08D0037DE6F /* Build configuration list for PBXNativeTarget "KartingGame" */;
+			buildPhases = (
+				577599191E84D08D0037DE6F /* Sources */,
+				5775991A1E84D08D0037DE6F /* Frameworks */,
+				5775991B1E84D08D0037DE6F /* Resources */,
+				577599571E84D4330037DE6F /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				577599561E84D4330037DE6F /* PBXTargetDependency */,
+			);
+			name = KartingGame;
+			productName = KartingGame;
+			productReference = 5775991D1E84D08D0037DE6F /* KartingGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		577599151E84D08D0037DE6F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = cgua;
+				TargetAttributes = {
+					5775991C1E84D08D0037DE6F = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 9E5HNNM285;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 577599181E84D08D0037DE6F /* Build configuration list for PBXProject "KartingGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 577599141E84D08D0037DE6F;
+			productRefGroup = 5775991E1E84D08D0037DE6F /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5775994E1E84D4210037DE6F /* Products */;
+					ProjectRef = 5775994D1E84D4210037DE6F /* HBFramework.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				5775991C1E84D08D0037DE6F /* KartingGame */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		577599521E84D4210037DE6F /* HBFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HBFramework.framework;
+			remoteRef = 577599511E84D4210037DE6F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5775991B1E84D08D0037DE6F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5775992B1E84D08D0037DE6F /* LaunchScreen.storyboard in Resources */,
+				577599281E84D08D0037DE6F /* Assets.xcassets in Resources */,
+				577599261E84D08D0037DE6F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		577599191E84D08D0037DE6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				577599231E84D08D0037DE6F /* ViewController.swift in Sources */,
+				577599211E84D08D0037DE6F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		577599561E84D4330037DE6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HBFramework;
+			targetProxy = 577599551E84D4330037DE6F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		577599241E84D08D0037DE6F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				577599251E84D08D0037DE6F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		577599291E84D08D0037DE6F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5775992A1E84D08D0037DE6F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5775992D1E84D08D0037DE6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5775992E1E84D08D0037DE6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		577599301E84D08D0037DE6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9E5HNNM285;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KartingGame/Carthage/Checkouts/HBFramework/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = KartingGame/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.cgua.KartingGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		577599311E84D08D0037DE6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 9E5HNNM285;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KartingGame/Carthage/Checkouts/HBFramework/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = KartingGame/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = me.cgua.KartingGame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		577599181E84D08D0037DE6F /* Build configuration list for PBXProject "KartingGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5775992D1E84D08D0037DE6F /* Debug */,
+				5775992E1E84D08D0037DE6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5775992F1E84D08D0037DE6F /* Build configuration list for PBXNativeTarget "KartingGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				577599301E84D08D0037DE6F /* Debug */,
+				577599311E84D08D0037DE6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 577599151E84D08D0037DE6F /* Project object */;
+}

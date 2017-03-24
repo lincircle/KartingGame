@@ -1,0 +1,10 @@
+framework module HBFramework {
+  umbrella header "HBFramework.h"
+
+  export *
+  module * { export * }
+}
+
+module HBFramework.Swift {
+    header "HBFramework-Swift.h"
+}

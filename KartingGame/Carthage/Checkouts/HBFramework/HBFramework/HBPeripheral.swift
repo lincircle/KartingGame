@@ -17,18 +17,18 @@ public protocol HBPeripheralDelegate {
     
 }
 
-public class HBPeripheral: NSObject, CBPeripheralDelegate {
-
+open class HBPeripheral: NSObject, CBPeripheralDelegate {
+    
     private var _discover: [CBUUID: [CBUUID: Set<CBUUID>]]? = nil
     
     private let _peripheral: CBPeripheral!
     
     public var peripheral: CBPeripheral {
-    
+        
         get {
-        
+            
             return _peripheral
-        
+            
         }
         
     }
@@ -54,7 +54,7 @@ public class HBPeripheral: NSObject, CBPeripheralDelegate {
     }
     
     public func setCommunicateCharacteristic(service: CBUUID, characteristic: CBUUID) {
-    
+        
         _communicate_service_uuid = service
         
         _communicate_characteristic_uuid = characteristic
@@ -66,7 +66,7 @@ public class HBPeripheral: NSObject, CBPeripheralDelegate {
     public func write(data: Data) {
         
         guard let characteristic = _communicate_characteristic else {
-        
+            
             print("[\(type(of: self))] no communicate characteristic")
             
             return
@@ -86,29 +86,27 @@ public class HBPeripheral: NSObject, CBPeripheralDelegate {
             var upper = (counter + 1) * 16
             
             if data.count < upper {
-            
+                
                 upper = data.count
                 
             }
             
             if lower == upper  {
-            
+                
                 break
-            
+                
             }
             
-            _peripheral.writeValue(data.subdata(in: Range(uncheckedBounds: (lower, upper))), for: characteristic, type: .withResponse)
-        
+            _peripheral.writeValue(data.subdata(in: Range(uncheckedBounds: (lower, upper))), for: characteristic, type: .withoutResponse)
+            
         }
         
-        
-    
     }
     
     public func discoverAllServices() {
-    
+        
         _peripheral.discoverServices(nil)
-    
+        
     }
     
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -134,7 +132,7 @@ public class HBPeripheral: NSObject, CBPeripheralDelegate {
             _discover![service.uuid] = [:]
             
             if let ccuuid = _communicate_characteristic_uuid , _communicate_characteristic == nil && _communicate_service_uuid == service.uuid {
-            
+                
                 peripheral.discoverCharacteristics([ccuuid], for: service)
                 
                 return
@@ -147,30 +145,30 @@ public class HBPeripheral: NSObject, CBPeripheralDelegate {
         
     }
     /*
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: Error?) {
+     func peripheral(_ peripheral: CBPeripheral, didDiscoverIncludedServicesFor service: CBService, error: Error?) {
      
-        guard let services = service.includedServices else {
+     guard let services = service.includedServices else {
      
-            return
+     return
      
-        }
+     }
      
-        if services.count <= 0 {
+     if services.count <= 0 {
      
-            return
+     return
      
-        }
+     }
      
-        for service in services {
+     for service in services {
      
-            peripheral.discoverIncludedServices(nil, for: service)
+     peripheral.discoverIncludedServices(nil, for: service)
      
-            peripheral.discoverCharacteristics(nil, for: service)
+     peripheral.discoverCharacteristics(nil, for: service)
      
-        }
+     }
      
-    }
-    */
+     }
+     */
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         
         guard let characteristics = service.characteristics else {
@@ -281,7 +279,7 @@ public class HBPeripheral: NSObject, CBPeripheralDelegate {
             }
             
             if let csu = _communicate_service_uuid, let ccu = _communicate_characteristic_uuid {
-            
+                
                 if csu == characteristic.service.uuid && ccu == characteristic.uuid {
                     
                     _communicate_characteristic = characteristic
@@ -289,7 +287,7 @@ public class HBPeripheral: NSObject, CBPeripheralDelegate {
                     _delegate.readyForCommunicate(peripheral: self)
                     
                 }
-            
+                
             }
             
         }
@@ -307,6 +305,18 @@ public class HBPeripheral: NSObject, CBPeripheralDelegate {
             }
             
         }
+        
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didUpdateNotificationStateFor characteristic: CBCharacteristic, error: Error?){
+        
+        print("didUpdateNotificationStateFor characteristic \(error)")
+        
+    }
+    
+    public func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        
+        print("didWriteValueFor characteristic \(characteristic.uuid) \(error)")
         
     }
     

@@ -18,6 +18,18 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func selectDevice( _ sender: Any) {
         
+        if let view = knob_view {
+            
+            view.isHidden = true
+            
+        }
+        
+        if let view = circle_uiview {
+            
+            view.isHidden = true
+            
+        }
+        
         showPickerView()
         
     }
@@ -41,8 +53,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var myPickerView = UIPickerView()
     
     var full_size: CGSize!
-    
-    var my_uiview: UIView!
     
     var knob_view: UIView!
     
@@ -358,6 +368,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
 }
+
+
 
 //MARK: - extension
 

@@ -175,6 +175,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             _write_data = "0"
             
+            last_data = "無"
+            
             _ble.write(data: _write_data!.data(using: .utf8)!)
             
         }
@@ -193,15 +195,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             _write_data = "1"
             
-            //_ble.write(data: _write_data!.data(using: .utf8)!)
-            
         case 46..<136 :
             
             write_date = "右"
             
             _write_data = "3"
-            
-            //_ble.write(data: _write_data!.data(using: .utf8)!)
             
         case (-45)..<46 :
             
@@ -209,15 +207,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             _write_data = "2"
             
-            //_ble.write(data: _write_data!.data(using: .utf8)!)
-            
         case (-135)...(-46) :
             
             write_date = "左"
             
             _write_data = "4"
-            
-            //_ble.write(data: _write_data!.data(using: .utf8)!)
             
         default :
             
@@ -232,6 +226,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             print("-->\(write_date)")
             
             _ble.write(data: _write_data!.data(using: .utf8)!)
+            
+            print("state = \(_ble.peripheral.state.rawValue)") // 試試看有沒有印出東西
             
         }
         
@@ -310,16 +306,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let dy = p1.y - p2.y
         
         return sqrt((dx * dx) + (dy * dy))
-        
-    }
-    
-    let p1 = CGPoint(x: 10, y: 10)
-    
-    let p2 = CGPoint(x: 10, y: 5)
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        print(distanceBetweenPoints(p1: p1, p2: p2))
         
     }
     

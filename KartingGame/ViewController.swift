@@ -18,15 +18,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBAction func selectDevice( _ sender: Any) {
         
-        if let view = knob_view {
+        if let _ = self.knob_view {
             
-            view.isHidden = true
+            self.knob_view = nil
             
         }
         
-        if let view = circle_uiview {
+        if let _ = self.circle_uiview {
             
-            view.isHidden = true
+            self.circle_uiview = nil
             
         }
         
@@ -54,15 +54,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var full_size: CGSize!
     
-    var knob_view: UIView!
+    var knob_view: UIView?
     
-    var circle_uiview: UIView!
+    var circle_uiview: UIView?
     
     var center_of_circle: CGPoint! //圓心座標
     
     var radius: CGFloat = 0 //半徑
     
     var last_data = "無"
+    
+    private var _timer: Timer?
 
     override func viewDidLoad() {
         
@@ -88,17 +90,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func showKnob() {
         
-        // 方向搖桿
+        // 畫面顯示方向搖桿
         
         full_size = UIScreen.main.bounds.size
         
         circle_uiview = UIView(frame: CGRect(x: 25, y: full_size.height / 2, width: full_size.width - 50, height: full_size.width - 50))
         
-        circle_uiview.backgroundColor = UIColor.darkGray
+        circle_uiview!.backgroundColor = UIColor.darkGray
         
-        circle_uiview.layer.cornerRadius = circle_uiview.frame.size.width/2
+        circle_uiview!.layer.cornerRadius = circle_uiview!.frame.size.width/2
         
-        circle_uiview.clipsToBounds = true
+        circle_uiview!.clipsToBounds = true
         
         radius = (full_size.width - 50) / 2
         
@@ -108,17 +110,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         print("圓心： \(center_of_circle.x) ,\(center_of_circle.y)")
         
-        self.view.addSubview(circle_uiview)
+        self.view.addSubview(circle_uiview!)
         
         knob_view = UIView(frame: CGRect(x: center_of_circle.x, y: center_of_circle.y, width: 100, height: 100))
         
-        knob_view.backgroundColor = UIColor.red
+        knob_view!.backgroundColor = UIColor.red
         
-        knob_view.layer.cornerRadius = knob_view.frame.size.width/2
+        knob_view!.layer.cornerRadius = knob_view!.frame.size.width/2
         
-        circle_uiview.clipsToBounds = true
+        circle_uiview!.clipsToBounds = true
         
-        self.view.addSubview(knob_view)
+        self.view.addSubview(knob_view!)
+        
+        //設定手勢
         
         let pan = UIPanGestureRecognizer(target: self, action: #selector(ViewController.pan))
         
@@ -126,7 +130,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         pan.maximumNumberOfTouches = 1
         
-        knob_view.addGestureRecognizer(pan)
+        knob_view!.addGestureRecognizer(pan)
+        
+        //設定 timer 定時檢查連線
+        
+        _timer = Timer(timeInterval: 5.0, target: self, selector: #selector(self.checkConnection), userInfo: nil, repeats: true)
         
     }
     
@@ -146,7 +154,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             print("手指距離在範圍內")
             
-            knob_view.center = current_position
+            knob_view!.center = current_position
             
         }
         else {
@@ -163,15 +171,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             print("在圓上的 x 座標： \(x), \(y)")
             
-            knob_view.center.x = x
+            knob_view!.center.x = x
             
-            knob_view.center.y = y
+            knob_view!.center.y = y
             
         }
         
         if recognizer.state == UIGestureRecognizerState.ended {
             
-            knob_view.center = center_of_circle
+            knob_view!.center = center_of_circle
             
             _write_data = "0"
             
@@ -327,6 +335,48 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
     }
     
+    //檢查現在藍牙有沒有斷線
+    
+    func checkConnection() {
+        
+        if _connect_peripheral!.peripheral.state == CBPeripheralState.disconnected {
+            
+            print("\(_connect_peripheral!.peripheral.name!) 已經斷線")
+            
+            if let t = _timer {
+                
+                t.invalidate()
+                
+                _timer = nil
+                
+            }
+            
+            let alert = UIAlertController(title: "錯誤", message: "\(_connect_peripheral!.peripheral.name!) 已經斷線", preferredStyle: .alert)
+            
+            let action = UIAlertAction(title: "關閉", style: .default) { _ in
+                
+                if let _ = self.knob_view {
+                    
+                    self.knob_view = nil
+                    
+                }
+                
+                if let _ = self.circle_uiview {
+                    
+                    self.circle_uiview = nil
+                    
+                }
+                
+            }
+            
+            alert.addAction(action)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
     //MARK: - PickerView setting
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -354,8 +404,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
 
 }
-
-
 
 //MARK: - extension
 
@@ -392,6 +440,8 @@ extension ViewController: HBCentralDelegate {
         self.label.textColor = UIColor(red: 0.0, green: 128.0, blue: 0.0, alpha: 1.0)
         
         showKnob()
+        
+        //藍牙連接上時，將呼叫 showknob func 將搖桿顯示出來
         
     }
     

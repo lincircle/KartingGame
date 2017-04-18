@@ -183,7 +183,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             _write_data = "0"
             
-            last_data = "無"
+            //last_data = "無"
             
             _ble.write(data: _write_data!.data(using: .utf8)!)
             

@@ -34,6 +34,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
     }
     
+    @IBAction func goSetting(_ sender: Any) {
+        
+        self.performSegue(withIdentifier: "toSetting", sender: nil)
+        
+    }
+    
     var _address = ""
     
     var _ble_central: HBCentral!
@@ -85,7 +91,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         _ble_central = HBCentral(delegate: self , timeOutInterval: TimeInterval(5.0), autoConnect: false)
         
         //showKnob()
-        
+
     }
     
     func showKnob() {

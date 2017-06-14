@@ -14,6 +14,8 @@
 		5775992B1E84D08D0037DE6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 577599291E84D08D0037DE6F /* LaunchScreen.storyboard */; };
 		577599531E84D4330037DE6F /* HBFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577599521E84D4210037DE6F /* HBFramework.framework */; };
 		577599541E84D4330037DE6F /* HBFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 577599521E84D4210037DE6F /* HBFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7C01D5611EED523B00672902 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01D5601EED523B00672902 /* SettingTableViewCell.swift */; };
+		7C01D5631EED525200672902 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C01D5621EED525200672902 /* SettingTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		5775992A1E84D08D0037DE6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5775992C1E84D08D0037DE6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5775994D1E84D4210037DE6F /* HBFramework.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HBFramework.xcodeproj; path = KartingGame/Carthage/Checkouts/HBFramework/HBFramework.xcodeproj; sourceTree = "<group>"; };
+		7C01D5601EED523B00672902 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		7C01D5621EED525200672902 /* SettingTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 				577599271E84D08D0037DE6F /* Assets.xcassets */,
 				577599291E84D08D0037DE6F /* LaunchScreen.storyboard */,
 				5775992C1E84D08D0037DE6F /* Info.plist */,
+				7C01D5601EED523B00672902 /* SettingTableViewCell.swift */,
+				7C01D5621EED525200672902 /* SettingTableViewController.swift */,
 			);
 			path = KartingGame;
 			sourceTree = "<group>";
@@ -199,6 +205,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C01D5631EED525200672902 /* SettingTableViewController.swift in Sources */,
+				7C01D5611EED523B00672902 /* SettingTableViewCell.swift in Sources */,
 				577599231E84D08D0037DE6F /* ViewController.swift in Sources */,
 				577599211E84D08D0037DE6F /* AppDelegate.swift in Sources */,
 			);

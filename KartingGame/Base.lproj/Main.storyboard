@@ -55,7 +55,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Arduino Go" id="9A6-wa-WyE">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="ouF-Ib-GTr">
+                        <barButtonItem key="rightBarButtonItem" title="設定" id="ouF-Ib-GTr">
                             <connections>
                                 <action selector="goSetting:" destination="BYZ-38-t0r" id="i7t-to-7Eu"/>
                             </connections>

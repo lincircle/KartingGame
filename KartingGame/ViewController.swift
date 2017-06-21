@@ -16,21 +16,50 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     @IBOutlet var btn_connect: UIButton!
     
-    @IBAction func selectDevice( _ sender: Any) {
+    //TODO: 連結按鈕改變位置, 按下斷線時，可以讓裝置斷線
+    
+    @IBAction func selectDevice( _ sender: Any) { //MARK: 讓裝置連線與斷線
         
-        if let _ = self.knob_view {
+        if !is_connected {
             
-            self.knob_view = nil
+            showPickerView()
+            
+            //TODO: 連線 func
             
         }
-        
-        if let _ = self.circle_uiview {
+        else {
+            /*
+            if let _ = self.knob_view {
+                
+                self.knob_view = nil
+                
+            }
             
-            self.circle_uiview = nil
+            if let _ = self.circle_uiview {
+                
+                self.circle_uiview = nil
+                
+            }
+            */
+            _ble_central.disconnect(peripheral: _ble.peripheral)
+            
+            is_connected = false
+            
+            label.text = "未連結任何裝置"
+            
+            self.label.layer.borderColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0).cgColor
+            
+            self.label.textColor = UIColor(red: 255.0, green: 0.0, blue: 0.0, alpha: 1.0)
+            
+            self.knob_view!.isHidden = true
+            
+            self.circle_uiview!.isHidden = true
+            
+            self.btn_connect.setTitle("連線裝置", for: .normal)
+            
+            print("已斷線")
             
         }
-        
-        showPickerView()
         
     }
     
@@ -46,7 +75,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var _ble: HBPeripheral!
     
-    var _write_data: String?
+    var _write_data: String? = "-1"
     
     var _can_communicate: Bool = false
     
@@ -70,6 +99,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var last_data = "無"
     
+    var tmp_last_data = "-1"
+    
+    var is_connected: Bool = false
+    
     private var _timer: Timer?
 
     override func viewDidLoad() {
@@ -89,9 +122,19 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.btn_connect.clipsToBounds = true
         
         _ble_central = HBCentral(delegate: self , timeOutInterval: TimeInterval(5.0), autoConnect: false)
+        /*
+        let button: UIButton = UIButton.buttonWithType(UIButtonType.custom) as! UIButton
         
-        //showKnob()
-
+        button.setImage(UIImage(named: "fb.png"), for: .normal)
+        
+        button.addTarget(self, action: "fbButtonPressed", for: UIControlEvents.touchUpInside)
+        //set frame
+        button.frame = CG CGRectMake(0, 0, 53, 31)
+        
+        let barButton = UIBarButtonItem(customView: button)
+        //assign button to navigationbar
+        self.navigationItem.rightBarButtonItem = barButton
+        */
     }
     
     func showKnob() {
@@ -124,6 +167,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         knob_view!.layer.cornerRadius = knob_view!.frame.size.width/2
         
+        knob_view!.center = CGPoint(x: center_of_circle.x, y:center_of_circle.y)
+        
         circle_uiview!.clipsToBounds = true
         
         self.view.addSubview(knob_view!)
@@ -152,13 +197,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         let distance = distanceBetweenPoints(p1: center_of_circle, p2: current_position)
         
-        print("距離為：\(distance)")
+        //print("距離為：\(distance)")
         
         //當手指距離已超出範圍，就不在更新搖桿畫面
         
         if distance <= radius {
             
-            print("手指距離在範圍內")
+            //print("手指距離在範圍內")
             
             knob_view!.center = current_position
             
@@ -169,13 +214,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             let vector = String(format: "%.3f",( radius / distance))
             
-            print("向量： \(vector)")
+            //print("向量： \(vector)")
             
             let x = ((current_position.x - center_of_circle.x) * CGFloat(NumberFormatter().number(from: vector)!)) + center_of_circle.x
             
             let y = ((current_position.y - center_of_circle.y) * CGFloat(NumberFormatter().number(from: vector)!)) + center_of_circle.y
             
-            print("在圓上的 x 座標： \(x), \(y)")
+            //print("在圓上的 x 座標： \(x), \(y)")
             
             knob_view!.center.x = x
             
@@ -189,9 +234,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             _write_data = "0"
             
+            tmp_last_data = "0"
+            
             //last_data = "無"
             
+            print("停止")
+            
             _ble.write(data: _write_data!.data(using: .utf8)!)
+            
+            return
             
         }
         
@@ -199,31 +250,39 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         print("角度為：\(angle(point: current_position))")
         
-        var write_date = ""
+        //var write_date = ""
         
         switch _angle {
             
         case 135...180, (-180)..<(-135) :
             
-            write_date = "前進"
+            print("前進")
+            
+            //write_date = "前進"
             
             _write_data = "1"
             
         case 46..<136 :
             
-            write_date = "右"
+            print("右")
+            
+            //write_date = "右"
             
             _write_data = "3"
             
         case (-45)..<46 :
             
-            write_date = "後退"
+            print("後退")
+            
+            //write_date = "後退"
             
             _write_data = "2"
             
         case (-135)...(-46) :
             
-            write_date = "左"
+            print("左")
+            
+            //write_date = "左"
             
             _write_data = "4"
             
@@ -233,6 +292,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
         }
         
+        if tmp_last_data != _write_data {
+            
+            _ble.write(data: _write_data!.data(using: .utf8)!)
+            
+            tmp_last_data = _write_data!
+            
+            print("tmp_last_data = \(tmp_last_data)")
+            
+            print("_write_data = \(_write_data!)")
+            
+            print("有更換")
+            
+        }
+        /*
         if last_data != write_date {
             
             print("改變方向 ------------------------ ")
@@ -246,22 +319,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         last_data = write_date
-        
+        */
     }
 
     func showPickerView() {
         
         let fullScreenSize = UIScreen.main.bounds.size
         
-        myPickerView = UIPickerView(frame: CGRect(x: 0, y: fullScreenSize.height * 0.7, width: fullScreenSize.width, height: 150))
+        myPickerView.frame = CGRect(x: 0, y: fullScreenSize.height * 0.7, width: fullScreenSize.width, height: 150)
         
         myPickerView.dataSource = self
         
         myPickerView.delegate = self
         
+        myPickerView.backgroundColor = UIColor.white
+        
+        myPickerView.selectRow(0, inComponent: 0, animated: true)
+        
+        //myPickerView.showsSelectionIndicator = true
+        
         self.view.addSubview(myPickerView)
         
-        toolBar = UIToolbar(frame: CGRect(x: 0, y: fullScreenSize.height * 0.7 - 50, width: fullScreenSize.width, height: 50))
+        toolBar = UIToolbar(frame: CGRect(x: 0, y: fullScreenSize.height * 0.7 - 50, width: fullScreenSize.width, height: 40))
         
         toolBar.barStyle = UIBarStyle.default
         
@@ -308,6 +387,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         _ble_central.connect(peripheral: _connect_peripheral!.peripheral)
+        
         
     }
     
@@ -393,19 +473,28 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
-        return _ready_to_connect.count
+        return _ready_to_connect.count + 1
         
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        return _ready_to_connect[row].peripheral.name!
+        if row == 0 {
+            
+            return "請選擇連接裝置"
+        }
+        
+        return _ready_to_connect[row - 1].peripheral.name!
         
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        _connect_peripheral = _ready_to_connect[row]
+        if row > 0 {
+            
+            _connect_peripheral = _ready_to_connect[row - 1]
+            
+        }
         
     }
 
@@ -439,11 +528,15 @@ extension ViewController: HBCentralDelegate {
         
         _ble.setCommunicateCharacteristic(service: CBUUID(string: "FFE0"), characteristic: CBUUID(string: "FFE1"))
         
-        label.text = "已連接上\(_connect_peripheral!.peripheral.name!)"
+        label.text = "已連接上 \(_connect_peripheral!.peripheral.name!)"
         
         self.label.layer.borderColor = UIColor(red: 0.0, green: 128.0, blue: 0.0, alpha: 1.0).cgColor
         
         self.label.textColor = UIColor(red: 0.0, green: 128.0, blue: 0.0, alpha: 1.0)
+        
+        is_connected = true
+        
+        btn_connect.setTitle("斷線此裝置", for: .normal)
         
         showKnob()
         

@@ -11,18 +11,15 @@ import MessageUI
 
 class SettingTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
     
-    let setting_title = ["意見回饋/合作機會","關於我們","操作說明","目前版本"]
+    let setting_title = ["意見回饋/合作機會","關於我們"]
+    
+    let img_name = ["mail.png","about_me"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
@@ -41,6 +38,8 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
         let cell = tableView.dequeueReusableCell(withIdentifier: "setting_cell", for: indexPath) as! SettingTableViewCell
         
         cell.title_label.text = setting_title[indexPath.row]
+        
+        cell.icon_img.image = UIImage(named: img_name[indexPath.row])
 
         return cell
     }
@@ -51,7 +50,6 @@ class SettingTableViewController: UITableViewController, MFMailComposeViewContro
             
             _sentMail()
             
-            //TODO: - 開啟寄信功能
         }
     }
     

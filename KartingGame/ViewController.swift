@@ -18,13 +18,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     //TODO: 連結按鈕改變位置, 按下斷線時，可以讓裝置斷線
     
-    @IBAction func selectDevice( _ sender: Any) { //MARK: 讓裝置連線與斷線
+    @IBAction func selectDevice( _ sender: Any) {
         
         if !is_connected {
             
             showPickerView()
-            
-            //TODO: 連線 func
             
         }
         else {
@@ -87,6 +85,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var myPickerView = UIPickerView()
     
+    let shopPicker = UIPickerView()
+    
     var full_size: CGSize!
     
     var knob_view: UIView?
@@ -103,8 +103,12 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var is_connected: Bool = false
     
+    var hide: Bool = false
+    
     private var _timer: Timer?
 
+    //開啟App
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -122,6 +126,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         self.btn_connect.clipsToBounds = true
         
         _ble_central = HBCentral(delegate: self , timeOutInterval: TimeInterval(5.0), autoConnect: false)
+        
+        // 增加一個觸控事件
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.hideKeyboard(tapG:)))
+        
+        tap.cancelsTouchesInView = false
+        
+        // 加在最基底的 self.view 上
+        self.view.addGestureRecognizer(tap)
+        
         /*
         let button: UIButton = UIButton.buttonWithType(UIButtonType.custom) as! UIButton
         
@@ -183,10 +196,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         knob_view!.addGestureRecognizer(pan)
         
-        //設定 timer 定時檢查連線
-        
-        _timer = Timer(timeInterval: 5.0, target: self, selector: #selector(self.checkConnection), userInfo: nil, repeats: true)
-        
     }
     
     func pan(recognizer: UIPanGestureRecognizer){
@@ -236,8 +245,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             tmp_last_data = "0"
             
-            //last_data = "無"
-            
             print("停止")
             
             _ble.write(data: _write_data!.data(using: .utf8)!)
@@ -250,15 +257,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         print("角度為：\(angle(point: current_position))")
         
-        //var write_date = ""
-        
         switch _angle {
             
         case 135...180, (-180)..<(-135) :
             
             print("前進")
-            
-            //write_date = "前進"
             
             _write_data = "1"
             
@@ -266,23 +269,17 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             print("右")
             
-            //write_date = "右"
-            
             _write_data = "3"
             
         case (-45)..<46 :
             
             print("後退")
             
-            //write_date = "後退"
-            
             _write_data = "2"
             
         case (-135)...(-46) :
             
             print("左")
-            
-            //write_date = "左"
             
             _write_data = "4"
             
@@ -305,61 +302,128 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             print("有更換")
             
         }
-        /*
-        if last_data != write_date {
-            
-            print("改變方向 ------------------------ ")
-            
-            print("-->\(write_date)")
-            
-            _ble.write(data: _write_data!.data(using: .utf8)!)
-            
-            print("state = \(_ble.peripheral.state.rawValue)") // 試試看有沒有印出東西
-            
-        }
         
-        last_data = write_date
-        */
     }
 
     func showPickerView() {
         
-        let fullScreenSize = UIScreen.main.bounds.size
+        print("showPickerView")
         
-        myPickerView.frame = CGRect(x: 0, y: fullScreenSize.height * 0.7, width: fullScreenSize.width, height: 150)
+        if hide == true {
+            
+            print("preHide=",hide)
+            
+            self.myPickerView.isHidden = false
+            
+            let fullScreenSize = UIScreen.main.bounds.size
+            
+            myPickerView.frame = CGRect(x: 0, y: fullScreenSize.height * 0.7, width: fullScreenSize.width, height: 150)
+            
+            myPickerView.dataSource = self
+            
+            myPickerView.delegate = self
+            
+            myPickerView.backgroundColor = UIColor.white
+            
+            myPickerView.selectRow(0, inComponent: 0, animated: true)
+            
+            //myPickerView.showsSelectionIndicator = true
+            
+            self.view.addSubview(myPickerView)
+            
+            toolBar = UIToolbar(frame: CGRect(x: 0, y: fullScreenSize.height * 0.7 - 50, width: fullScreenSize.width, height: 40))
+            
+            toolBar.barStyle = UIBarStyle.default
+            
+            toolBar.isTranslucent = true
+            
+            //        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil);
+            
+            let doneButton = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.hidePickerView))
+            
+            let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            
+            let cancelButton = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelClick))
+            
+            toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+            
+            self.view.addSubview(toolBar)
+            
+            hide = false
+            
+        }else{
+            
+            let fullScreenSize = UIScreen.main.bounds.size
+            
+            myPickerView.frame = CGRect(x: 0, y: fullScreenSize.height * 0.7, width: fullScreenSize.width, height: 150)
+            
+            myPickerView.dataSource = self
+            
+            myPickerView.delegate = self
+            
+            myPickerView.backgroundColor = UIColor.white
+            
+            myPickerView.selectRow(0, inComponent: 0, animated: true)
+            
+            //myPickerView.showsSelectionIndicator = true
+            
+            self.view.addSubview(myPickerView)
+            
+            toolBar = UIToolbar(frame: CGRect(x: 0, y: fullScreenSize.height * 0.7 - 50, width: fullScreenSize.width, height: 40))
+            
+            toolBar.barStyle = UIBarStyle.default
+            
+            toolBar.isTranslucent = true
+            
+            //        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil);
+            
+            let doneButton = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.hidePickerView))
+            
+            let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            
+            let cancelButton = UIBarButtonItem(title: "取消", style: UIBarButtonItemStyle.plain, target: self, action: #selector(cancelClick))
+            
+            toolBar.setItems([doneButton, spaceButton, cancelButton], animated: false)
+            
+            self.view.addSubview(toolBar)
+
+        }
         
-        myPickerView.dataSource = self
         
-        myPickerView.delegate = self
         
-        myPickerView.backgroundColor = UIColor.white
+    }
+    
+    func cancelClick(){
         
-        myPickerView.selectRow(0, inComponent: 0, animated: true)
+        if hide == false{
         
-        //myPickerView.showsSelectionIndicator = true
+            self.view.endEditing(true)
+                
+            self.myPickerView.isHidden = true
+            
+            self.toolBar.isHidden = true
+            
+            hide = true
+            
+        }
         
-        self.view.addSubview(myPickerView)
-        
-        toolBar = UIToolbar(frame: CGRect(x: 0, y: fullScreenSize.height * 0.7 - 50, width: fullScreenSize.width, height: 40))
-        
-        toolBar.barStyle = UIBarStyle.default
-        
-        toolBar.isTranslucent = true
-        
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil);
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(self.hidePickerView))
-        
-        toolBar.setItems([flexibleSpace, doneButton], animated: false)
-        
-        self.view.addSubview(toolBar)
-        
+    }
+
+    
+    
+    // 按空白處會隱藏編輯狀態
+    func hideKeyboard(tapG:UITapGestureRecognizer){
+        self.view.endEditing(true)
     }
     
     func hidePickerView() {
         
-        self.view.endEditing(true)
+        if hide == false {
         
+        hide = true
+           
+        self.view.endEditing(true)
+            
         self.myPickerView.isHidden = true
         
         self.toolBar.isHidden = true
@@ -370,7 +434,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             
             let alert_btn = UIAlertAction(title: "關閉", style: .default) { _ in
                 
-                self.showPickerView()
+//                self.showPickerView()
                 
             }
             
@@ -387,7 +451,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         _ble_central.connect(peripheral: _connect_peripheral!.peripheral)
-        
+            
+        }
         
     }
     
@@ -485,6 +550,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         
         return _ready_to_connect[row - 1].peripheral.name!
+        
+        
         
     }
     

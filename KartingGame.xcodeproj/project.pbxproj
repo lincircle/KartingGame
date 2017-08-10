@@ -148,7 +148,7 @@
 				TargetAttributes = {
 					5775991C1E84D08D0037DE6F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 9E5HNNM285;
+						DevelopmentTeam = 5KT5EWSLZV;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -338,7 +338,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9E5HNNM285;
+				DEVELOPMENT_TEAM = 5KT5EWSLZV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KartingGame/Carthage/Checkouts/HBFramework/Carthage/Build/iOS",
@@ -357,7 +357,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 9E5HNNM285;
+				DEVELOPMENT_TEAM = 5KT5EWSLZV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KartingGame/Carthage/Checkouts/HBFramework/Carthage/Build/iOS",
